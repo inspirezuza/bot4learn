@@ -34,6 +34,10 @@ class joinleave(commands.Cog):
             title = 'Goodbye massage',
             description = f"Goodbye {member}, Don't comeback!"
         )
+        mbed.set_thumbnail(url=f"{member.avatar_url}")
+        mbed.set_author(name=f"{member.name}", icon_url=f"{member.avatar_url}")
+        mbed.set_footer(text=f"{member.guild}", icon_url=f"{member.guild.icon_url}")
+        mbed.timestamp = datetime.datetime.utcnow()
         await channel.send(embed=mbed)
 
     @commands.command()
