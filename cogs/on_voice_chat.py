@@ -18,12 +18,12 @@ class on_voice_chat(commands.Cog):
 
         if not before.channel:
             mbed = discord.Embed(
-            colour = (discord.Colour.magenta()),
+            colour = (discord.Colour.green()),
             title = 'User Reported',
-            description = f"{member.name} joined {after.channel.name}"
+            description = f"{member.display_name} joined {after.channel.name}"
         )
             mbed.set_thumbnail(url=f"{member.avatar_url}")
-            mbed.set_author(name=f"{member.name}", icon_url=f"{member.avatar_url}")
+            mbed.set_author(name=f"{member.display_name}", icon_url=f"{member.avatar_url}")
             mbed.set_footer(text=f"{member.guild}", icon_url=f"{member.guild.icon_url}")
             mbed.timestamp = datetime.datetime.utcnow()
             await channel.send(embed=mbed)
@@ -32,10 +32,10 @@ class on_voice_chat(commands.Cog):
             mbed = discord.Embed(
             colour = (discord.Colour.magenta()),
             title = 'User Reported',
-            description = f"{member.name} left channel"
+            description = f"{member.display_name} left channel"
         )
             mbed.set_thumbnail(url=f"{member.avatar_url}")
-            mbed.set_author(name=f"{member.name}", icon_url=f"{member.avatar_url}")
+            mbed.set_author(name=f"{member.display_name}", icon_url=f"{member.avatar_url}")
             mbed.set_footer(text=f"{member.guild}", icon_url=f"{member.guild.icon_url}")
             mbed.timestamp = datetime.datetime.utcnow()
             await channel.send(embed=mbed)
@@ -43,12 +43,12 @@ class on_voice_chat(commands.Cog):
         if before.channel and after.channel:
             if before.channel.id != after.channel.id :
                 mbed = discord.Embed(
-                colour = (discord.Colour.magenta()),
+                colour = (discord.Colour.gold()),
                 title = 'User Reported',
-                description = f"{member.name} switched to {after.channel.name}"
+                description = f"{member.display_name} switched to {after.channel.name}"
             )
                 mbed.set_thumbnail(url=f"{member.avatar_url}")
-                mbed.set_author(name=f"{member.name}", icon_url=f"{member.avatar_url}")
+                mbed.set_author(name=f"{member.display_name}", icon_url=f"{member.avatar_url}")
                 mbed.set_footer(text=f"{member.guild}", icon_url=f"{member.guild.icon_url}")
                 mbed.timestamp = datetime.datetime.utcnow()
                 await channel.send(embed=mbed)
