@@ -9,7 +9,7 @@ class QuickPoll(commands.Cog):
         self.client = client
 
     @commands.command(pass_context=True)
-    async def quickpoll(self, ctx, question, *options: str):
+    async def poll(self, ctx, question, *options: str):
         if len(options) <= 1:
             await ctx.send('You need more than one option to make a poll!')
             return
