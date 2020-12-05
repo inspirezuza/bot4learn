@@ -2,3 +2,10 @@
 *.db-journal
 __pycache__
 .vscode/*
+
+# Google API Secrets
+# client_secret.json
+# application_credentials.json
+# storage.json
+# credentials.json
+token.pickle

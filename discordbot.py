@@ -38,7 +38,10 @@ async def on_raw_reaction_add(payload):
          #   member = discord.utils.find(la)
 
 for filename in os.listdir('./cogs'):
-    if filename.endswith('.py'):
-        client.load_extension(f'cogs.{filename[:-3]}')
+    print(filename)
+    if filename == 'gsheet.py':
+        continue
+    elif filename.endswith('.py'):    
+            client.load_extension(f'cogs.{filename[:-3]}')
 
 client.run('NzM1MDkwMzY3NTYwNTQ4NDM0.XxbMQA.Ich_4dxZEosUFgQzcoNdxPj0hr4') 
