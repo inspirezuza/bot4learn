@@ -22,23 +22,22 @@ async def reload(ctx, extension) :
     client.load_extension(f'cogs.{extension}')
     await ctx.send(f'reload {extension}')
 
-@client.event
-async def on_raw_reaction_add(payload):
-    message_id = payload.message_id
-    if message_id == 782987819534123089:
-        guild_id = payload.guild_id
-        guild = discord.utils.find(lambda g : g.id == guild_id, client.guilds)
+# @client.event
+# async def on_raw_reaction_add(payload):
+#     message_id = payload.message_id
+#     if message_id == 782987819534123089:
+#         guild_id = payload.guild_id
+#         guild = discord.utils.find(lambda g : g.id == guild_id, client.guilds)
 
-        if payload.emoji.name == 'getrole':
-            role = discord.utils.get(guild.roles, name="testrolereac")
-        else:
-            print('need more')
+#         if payload.emoji.name == 'getrole':
+#             role = discord.utils.get(guild.roles, name="testrolereac")
+#         else:
+#             print('need more')
         
         #if role is not None:
          #   member = discord.utils.find(la)
 
 for filename in os.listdir('./cogs'):
-    print(filename)
     if filename == 'gsheet.py':
         continue
     elif filename.endswith('.py'):    
