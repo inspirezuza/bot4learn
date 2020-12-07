@@ -5,6 +5,10 @@ from datetime import timezone,tzinfo,timedelta
 from discord.ext import commands
 
 client = commands.Bot(command_prefix='.') #กำหนด Prefix
+
+@client.event
+async def on_ready():
+    print(f'We have logged in as {client.user}')
                                                                                                           
 @client.command()
 async def load(ctx, extension) :
