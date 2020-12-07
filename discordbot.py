@@ -20,7 +20,7 @@ async def unload(ctx, extension) :
 async def reload(ctx, extension) :
     client.unload_extension(f'cogs.{extension}')
     client.load_extension(f'cogs.{extension}')
-    print(f'reload {extension}')
+    await ctx.send(f'reload {extension}')
 
 @client.event
 async def on_raw_reaction_add(payload):

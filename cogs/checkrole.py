@@ -13,7 +13,7 @@ class checkrole(commands.Cog):
         self.channel = 'nope'
 
     @commands.command()
-    async def start(self, ctx,):
+    async def start(self, ctx):
         self.start_state = True
 
         member = ctx.author                          
@@ -61,6 +61,25 @@ class checkrole(commands.Cog):
                     mbed.set_footer(text=f"{member.guild}", icon_url=f"{member.guild.icon_url}")
                     mbed.timestamp = datetime.datetime.utcnow()
                     await channel.send(embed=mbed)
+
+    @commands.command()
+    async def stop(self, ctx):
+        self.start_state = False
+
+        member = ctx.author                          
+        roles = [role for role in member.roles]
+        check_role = False
+        for role in roles:
+            if role.name == 'student':
+                check_role = True
+        
+        self.channel = discord.utils.get(member.guild.voice_channels, name=f"{member.voice.channel}")
+        voice_channels_members = self.channel.members
+
+        for member in voice_channels_members:
+            self.nameDict[member.nick][1] = datetime.datetime.utcnow()
+
+        await ctx.send(f'{self.nameDict} {self.channel.name}')
             
         
 def setup(client):
