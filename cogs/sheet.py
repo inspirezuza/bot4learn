@@ -39,13 +39,5 @@ class sheet(commands.Cog):
                 # Needs more/less fields
                 await message.channel.send('Error: You need to add {0} fields, meaning it can only have {1} comma.'.format(FIELDS,FIELDS-1))
         
-        # # Whois
-        # # Please dont remove the copyright and github repo
-        # elif len(message.mentions) > 0:
-        #     for muser in message.mentions:
-        #         if muser.id == client.user.id:
-        #             if any(word in message.content for word in ['whois','who is','Help','help','info']):
-        #                 await message.channel.send('Thi')
-
 def setup(client):
     client.add_cog(sheet(client))
