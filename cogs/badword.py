@@ -12,18 +12,22 @@ class badword(commands.Cog):
     def __init__(self, client):
         self.client = client
 
+    
     @commands.Cog.listener()
     async def on_message(self, message):
         for bad_word in bad_words:
             if bad_word in message.content:
-                mbed = discord.Embed(
-                colour = (discord.Colour.red()),
-                title = 'Oops!',
-                description = f"{message.author.mention}, your message has been censored."
-                )
-                await message.channel.send(embed=mbed)
-                await message.delete()
-        
-            
+                if not message.author.bot:
+                    mbed = discord.Embed(
+                    colour = (discord.Colour.red()),
+                    title = 'Oops!',
+                    description = f"{message.author.mention}, your message has been censored."
+                    )
+                    await message.channel.send(embed=mbed)
+                    await message.delete()
+                    break
+                else:
+                    break
+
 def setup(client):
     client.add_cog(badword(client))
