@@ -4,7 +4,7 @@ import datetime
 from datetime import timezone,tzinfo,timedelta
 from discord.ext import commands
 
-client = commands.Bot(command_prefix='+') #กำหนด Prefix
+client = commands.Bot(command_prefix='!') #กำหนด Prefix
 
 @client.event
 async def on_ready():
@@ -33,7 +33,7 @@ for filename in os.listdir('./cogs'):
     elif filename.endswith('.py'):    
             client.load_extension(f'cogs.{filename[:-3]}')
 
-client.run('NzM1MDkwMzY3NTYwNTQ4NDM0.XxbMQA.Ich_4dxZEosUFgQzcoNdxPj0hr4') 
+client.run('NzM1MDkwMzY3NTYwNTQ4NDM0.XxbMQA.-SSCuZWL-ZrXW7N-0GWPvFHCVlU') 
 
 # NzQ3MDI0NTUxODY2NjYyOTk1.X0I21A.Ce21eLpat5wZAbuW5B3Vla-zUEs สำหรับบอทกาก
-# NzM1MDkwMzY3NTYwNTQ4NDM0.XxbMQA.Ich_4dxZEosUFgQzcoNdxPj0hr4 สำหรับของจริง
+# NzM1MDkwMzY3NTYwNTQ4NDM0.XxbMQA.-SSCuZWL-ZrXW7N-0GWPvFHCVlU สำหรับของจริง
