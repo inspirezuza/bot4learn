@@ -9,6 +9,8 @@ class rolereac(commands.Cog):
     @commands.Cog.listener()
     async def on_raw_reaction_add(self, payload):
         message_id = payload.message_id
+        channel_id = payload.channel_id
+        channel = self.client.get_channel(channel_id)
         if message_id == 790159697213784094:
             # channel = self.client.get_channel('role-react')
             # guild_id = payload.guild_id
@@ -16,6 +18,8 @@ class rolereac(commands.Cog):
 
             if payload.emoji.name == 'getrole':
                 print('nice one')
+                await channel.send('EZ')
+
                 # await ctx.send('เห้อ')
 
             elif payload.emoji.name == 'getrole2':
