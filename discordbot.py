@@ -6,6 +6,8 @@ from discord.ext import commands
 
 client = commands.Bot(command_prefix='!') #กำหนด Prefix
 
+print('loading')
+
 @client.event
 async def on_ready():
     print(f'We have logged in as {client.user}')
@@ -15,7 +17,7 @@ async def load(ctx, extension) :
     client.load_extension(f'cogs.{extension}')
     print(f'load {extension}')
 
-@client.command()
+@client.command()   
 async def unload(ctx, extension) :
     client.unload_extension(f'cogs.{extension}')
     print(f'unload {extension}')
@@ -35,5 +37,5 @@ for filename in os.listdir('./cogs'):
 
 client.run('NzM1MDkwMzY3NTYwNTQ4NDM0.XxbMQA.-SSCuZWL-ZrXW7N-0GWPvFHCVlU') 
 
-# NzQ3MDI0NTUxODY2NjYyOTk1.X0I21A.Ce21eLpat5wZAbuW5B3Vla-zUEs สำหรับบอทกาก
-# NzM1MDkwMzY3NTYwNTQ4NDM0.XxbMQA.-SSCuZWL-ZrXW7N-0GWPvFHCVlU สำหรับของจริง
+# NzQ3MDI0NTUxODY2NjYyOTk1.X0I21A.xxK2DWyopQdPqpnsGTz9xzRQ6oA สำหรับบอทกาก
+# NzM1MDkwMzY3NTYwNTQ4NDM0.XxbMQA.-SSCuZWL-ZrXW7N-0GWPvFHCVlU สำหรับของจริง    '

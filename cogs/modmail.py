@@ -35,7 +35,5 @@ class modmail(commands.Cog):
                 mod_message = string[index:]
                 await member_object.send("[" + message.author.display_name + "]" + mod_message)
         
-
-
 def setup(client):
     client.add_cog(modmail(client))
