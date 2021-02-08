@@ -1,4 +1,5 @@
 import discord
+import datetime
 from discord.ext import commands
 
 class modmail(commands.Cog):
@@ -15,25 +16,46 @@ class modmail(commands.Cog):
         if str(message.channel.type) == "private":
             if message.attachments != empty_array:
                 files = message.attachments
-                await modmail_channel.send("[" + message.author.display_name + "]")
+                mbed = discord.Embed(
+                    colour = (discord.Colour.green()),
+                    title = f'Message from student',
+                    description = f'`{message.content}`'
+                )
+                mbed.timestamp = datetime.datetime.utcnow()
+                for file in files:
+                    mbed.set_thumbnail(url=file.url)
+                await modmail_channel.send(embed=mbed)
                 
-                for file in files:
-                    await modmail_channel.send(file.url)
+                
+                    # await modmail_channel.send(file.url)
             else:
-                await modmail_channel.send("[" + message.author.display_name + "] " + message.content)
-        elif str(message.channel) == "mod-mail" and message.content.startswith("<"):
-            member_object = message.mentions[0]
-            if message.attachments != empty_array:
-                files = message.attachments
-                await modmail_channel.send("[" + message.author.display_name + "]")
+                mbed = discord.Embed(
+                    colour = (discord.Colour.green()),
+                    title = f'Message from student',
+                    description = f'`{message.content}`'
+                )
+                mbed.timestamp = datetime.datetime.utcnow()
+                await modmail_channel.send(embed=mbed)
+            mbed = discord.Embed(
+                    colour = (discord.Colour.green()),
+                    title = f'Your message has been sent',
+                    description = f'`{message.content}`'
+                )
+            mbed.timestamp = datetime.datetime.utcnow()
+            await message.author.send(embed=mbed)
+        # elif str(message.channel) == "mod-mail" and message.content.startswith("<"):
+        #     member_object = message.mentions[0]
+        #     if message.attachments != empty_array:
+        #         files = message.attachments
+        #         await modmail_channel.send("[" + message.author.display_name + "]")
 
-                for file in files:
-                    await member_object.send(file.url)
-            else:
-                index = message.content.index(" ")
-                string = message.content
-                mod_message = string[index:]
-                await member_object.send("[" + message.author.display_name + "]" + mod_message)
+        #         for file in files:
+        #             await member_object.send(file.url)
+        #     else:
+        #         index = message.content.index(" ")
+        #         string = message.content
+        #         mod_message = string[index:]
+        #         await member_object.send("[" + message.author.display_name + "]" + mod_message)
         
 def setup(client):
     client.add_cog(modmail(client))
