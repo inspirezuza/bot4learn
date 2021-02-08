@@ -7,21 +7,12 @@ import sqlite3
 from datetime import timezone,tzinfo,timedelta
 from discord.ext import commands
 
-client = commands.Bot(command_prefix='.') #กำหนด Prefix
+client = commands.Bot(command_prefix='!') #กำหนด Prefix
 
 print('loading')
 
 @client.event
 async def on_ready():
-    db = sqlite3.connect('main.sqlite')
-    cursor = db.cursor()
-    cursor.execute('''
-        CREATE TABLE IF NOT EXISTS main(
-        guild_id TEXT,
-        msg TEXT,
-        channel_id TEXT
-        )    
-        ''')
     print(f'We have logged in as {client.user}')
                                                                                                   
 @client.command()
