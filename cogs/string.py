@@ -29,5 +29,9 @@ class string(commands.Cog):
         mbed.timestamp = datetime.datetime.utcnow()
         await ctx.send(embed=mbed)
 
+    @commands.command()
+    async def clear(self, ctx, amount=5):
+       await ctx.channel.purge(limit=amount)
+
 def setup(client):
     client.add_cog(string(client))
