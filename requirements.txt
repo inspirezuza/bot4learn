@@ -1,4 +1,5 @@
 discord.py
+itertools
 asyncio
 google-api-python-client 
 google-auth-httplib2 
