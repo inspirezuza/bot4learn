@@ -4,7 +4,6 @@ from discord.ext import commands
 from discord.ext.commands import Bot
 from datetime import timezone,tzinfo,timedelta
 
-
 class on_voice_chat(commands.Cog):
 
     def __init__(self, client):
@@ -12,7 +11,7 @@ class on_voice_chat(commands.Cog):
 
     @commands.Cog.listener()
     async def on_voice_state_update(self, member, before, after):
-        channel = discord.utils.get(member.guild.text_channels, name="on_voice_chat")
+        channel = discord.utils.get(member.guild.text_channels, name="bot-log")
         if member.bot:
             return
 
@@ -53,6 +52,5 @@ class on_voice_chat(commands.Cog):
                 mbed.timestamp = datetime.datetime.utcnow()
                 await channel.send(embed=mbed)
             
-
 def setup(client):
     client.add_cog(on_voice_chat(client))

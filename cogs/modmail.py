@@ -13,7 +13,8 @@ class modmail(commands.Cog):
         modmail_channel = discord.utils.get(self.client.get_all_channels(), name="mod-mail")
         if message.author == self.client.user:
             return
-        if str(message.channel.type) == "private":
+        if str(message.channel.type) == "private" and message.content.startswith("!mail "):
+            message.content = message.content[6:]
             if message.attachments != empty_array:
                 files = message.attachments
                 mbed = discord.Embed(

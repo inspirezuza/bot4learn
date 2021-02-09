@@ -1,6 +1,7 @@
 discord.py
 itertools
 asyncio
+pytz
 google-api-python-client 
 google-auth-httplib2 
 google-auth-oauthlib
