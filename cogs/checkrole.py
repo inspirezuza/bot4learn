@@ -187,10 +187,6 @@ class checkrole(commands.Cog):
             else:
                 self.nameDict[member.nick][1] = str(datetime.now(pytz.timezone("Asia/Bangkok")))[11:16]
 
-        # self.nameDict = {'Faith': [datetime.datetime(2020, 12, 7, 15, 21, 31, 199880), datetime.datetime(2020, 12, 7, 15, 21, 35, 335197)]
-        #     ,'Haift': [datetime.datetime(2020, 12, 7, 15, 21, 31, 199880), datetime.datetime(2020, 12, 7, 15, 21, 35, 335197)]
-        #     }
-
         SPREADSHEET_ID = '1QsFYP5Xf_8PXgkcJOSVLde1hZ1xedOrNpB1MUfwopNY' # Add ID here
         RANGE_NAME = 'A1'
         FIELDS = 1 # Amount of fields/cells
@@ -204,24 +200,16 @@ class checkrole(commands.Cog):
                 self.sheet.add(SPREADSHEET_ID, RANGE_NAME, DATA)
                 print('Your data has been successfully submitted!')
 
-                mbed = discord.Embed(
-                    colour = (discord.Colour.green()),
-                    title = f'FINISH CLASS',
-                    description = f'google sheet:https://docs.google.com/spreadsheets/d/1QsFYP5Xf_8PXgkcJOSVLde1hZ1xedOrNpB1MUfwopNY/edit#gid=0'      
-                    )
-                await ctx.send(embed=mbed)
             else:
                 # Needs more/less fields
                 print('Error: You need to add {0} fields, meaning it can only have {1} comma.'.format(FIELDS,FIELDS-1))
-        # if len(result) == FIELDS:
-        #     # Add
-        #     print(message.created_at)
-        #     DATA = [message.author.name] + [str(message.author.id)] + [str(message.created_at)] + result
-        #     sheet.add(SPREADSHEET_ID, RANGE_NAME, DATA)
-        #     print('Your data has been successfully submitted!')
-        # else:
-        #     # Needs more/less fields
-        #     print('Error: You need to add {0} fields, meaning it can only have {1} comma.'.format(FIELDS,FIELDS-1)
+ 
+        mbed = discord.Embed(
+            colour = (discord.Colour.green()),
+            title = f'FINISH CLASS',
+            description = f'google sheet:https://docs.google.com/spreadsheets/d/1QsFYP5Xf_8PXgkcJOSVLde1hZ1xedOrNpB1MUfwopNY/edit#gid=0'      
+            )
+        await ctx.send(embed=mbed)
 
 def setup(client):
     client.add_cog(checkrole(client))
