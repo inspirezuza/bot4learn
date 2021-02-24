@@ -88,7 +88,12 @@ class checkrole(commands.Cog):
             self.luckymember_check = True
 
     @commands.command()
-    async def attendance(self, ctx):
+    async def attendance(self, ctx, starttime = '0'):
+        if starttime != '0':
+            await ctx.send(f'class will start in {starttime} (24-hour clock)')
+            while str(datetime.now(pytz.timezone("Asia/Bangkok")))[11:16] !=  starttime:
+                await asyncio.sleep(1)
+
         self.start_state = True
 
         member = ctx.author                          
@@ -97,8 +102,7 @@ class checkrole(commands.Cog):
         except AttributeError:
             mbed = discord.Embed(
                     colour = (discord.Colour.red()),
-                    title = f'ERROR',
-                    description = f'`No one in voice channel`',
+                    description = f'`No one in voice channel',
                 )
             await ctx.send(embed=mbed)
 
@@ -186,8 +190,9 @@ class checkrole(commands.Cog):
                     self.nameDict[member.nick].append(str(datetime.now(pytz.timezone("Asia/Bangkok")))[11:16])
             else:
                 self.nameDict[member.nick][1] = str(datetime.now(pytz.timezone("Asia/Bangkok")))[11:16]
-
-        SPREADSHEET_ID = '1QsFYP5Xf_8PXgkcJOSVLde1hZ1xedOrNpB1MUfwopNY' # Add ID here
+        dateftime =  str(datetime.now(pytz.timezone("Asia/Bangkok")))[0:16]
+        SPREADSHEET_ID = str(self.sheet.create(dateftime)) # Add ID here
+        print(SPREADSHEET_ID)
         RANGE_NAME = 'A1'
         FIELDS = 1 # Amount of fields/cells
 
@@ -196,7 +201,10 @@ class checkrole(commands.Cog):
             result = [f'{self.nameDict[key][0]} - {self.nameDict[key][1]}']
             if len(result) == FIELDS:
                 # Add
-                DATA = [key[0:2]] + [key[3:]] + [456] + result
+                if key[0:3] != 'ครู':
+                    DATA = [key[0:2]] + [key[3:]] + ['ตรงเวลา'] + result
+                else:
+                    DATA = [key[0:3]] + [key[4:]] + ['ตรงเวลา'] + result
                 self.sheet.add(SPREADSHEET_ID, RANGE_NAME, DATA)
                 print('Your data has been successfully submitted!')
 
@@ -207,9 +215,11 @@ class checkrole(commands.Cog):
         mbed = discord.Embed(
             colour = (discord.Colour.green()),
             title = f'FINISH CLASS',
-            description = f'google sheet:https://docs.google.com/spreadsheets/d/1QsFYP5Xf_8PXgkcJOSVLde1hZ1xedOrNpB1MUfwopNY/edit#gid=0'      
+            description = f'google sheet:https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}/edit#gid=0'      
             )
         await ctx.send(embed=mbed)
+
+        self.nameDict = {}
 
 def setup(client):
     client.add_cog(checkrole(client))

@@ -10,6 +10,8 @@ class sheet(commands.Cog):
         self.client = client
         self.sheet = gsheet()
 
+    
+
     @commands.Cog.listener()
     async def on_message(self, message):
 
@@ -38,6 +40,12 @@ class sheet(commands.Cog):
             else:
                 # Needs more/less fields
                 await message.channel.send('Error: You need to add {0} fields, meaning it can only have {1} comma.'.format(FIELDS,FIELDS-1))
-        
+
+        if message.content.startswith('.create '):
+            msg = message.content[8:]
+            self.sheet.create(msg)
+            print("go on")
+            await message.channel.send('go on')
+
 def setup(client):
     client.add_cog(sheet(client))

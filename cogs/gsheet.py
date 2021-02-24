@@ -43,4 +43,16 @@ class gsheet(object):
         result = sheet.values().append(
             spreadsheetId=sheetid, range=sheetrange,
             valueInputOption='RAW', body=body).execute()
-        
+
+    def create(self,title='Missing'):
+        spreadsheet = {
+            'properties': {
+                'title': title
+            }
+        }
+        spreadsheet = self.service.spreadsheets().create(body=spreadsheet,
+                                            fields='spreadsheetId').execute()
+
+        sheetid = spreadsheet.get('spreadsheetId')
+        print(f'sheetid = {sheetid} title = {title}')
+        return spreadsheet.get('spreadsheetId')
