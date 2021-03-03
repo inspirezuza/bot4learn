@@ -84,7 +84,6 @@ class checkrole(commands.Cog):
 
         #lucky member
         if str(message.channel.type) == "private" and self.luckymember == message.author:
-            print('hello')
             self.luckymember_check = True
 
     @commands.command()
@@ -169,7 +168,6 @@ class checkrole(commands.Cog):
     @commands.command()
     async def finish(self, ctx):
         self.start_state = False
-        print()
 
         if self.attendance_check == True:
             self.attendance_loop = False
@@ -192,20 +190,38 @@ class checkrole(commands.Cog):
                 self.nameDict[member.nick][1] = str(datetime.now(pytz.timezone("Asia/Bangkok")))[11:16]
         dateftime =  str(datetime.now(pytz.timezone("Asia/Bangkok")))[0:16]
         SPREADSHEET_ID = str(self.sheet.create(dateftime)) # Add ID here
-        print(SPREADSHEET_ID)
         RANGE_NAME = 'A1'
         FIELDS = 1 # Amount of fields/cells
 
+        for key in self.nameDict: 
+            result = [f'{self.nameDict[key][0]} - {self.nameDict[key][1]}']
+            if len(result) == FIELDS:
+                # Add
+                teachertime = result
+
+                if key[0:3] == 'ครู':
+                    DATA = [key[0:3]] + [key[4:].split()[0]] + [key[4:].split()[1]] + ['ตรงเวลา'] + result
+                    self.sheet.add(SPREADSHEET_ID, RANGE_NAME, DATA)
+                    print('hello mother fucker')
+                    break
+                
         # Code
         for key in self.nameDict: 
             result = [f'{self.nameDict[key][0]} - {self.nameDict[key][1]}']
             if len(result) == FIELDS:
                 # Add
+
                 if key[0:3] != 'ครู':
-                    DATA = [key[0:2]] + [key[3:]] + ['ตรงเวลา'] + result
-                else:
-                    DATA = [key[0:3]] + [key[4:]] + ['ตรงเวลา'] + result
-                self.sheet.add(SPREADSHEET_ID, RANGE_NAME, DATA)
+                    print('mother fucky')
+                    if result == teachertime:
+                        DATA = [key[0:2]] + [key[3:].split()[0]] + [key[3:].split()[1]] + ['ตรงเวลา'] + result
+                        self.sheet.add(SPREADSHEET_ID, RANGE_NAME, DATA)
+
+                    else:
+                        DATA = [key[0:2]] + [key[3:].split()[0]] + [key[3:].split()[1]] + ['สาย'] + result
+                        self.sheet.add(SPREADSHEET_ID, RANGE_NAME, DATA)
+
+                
                 print('Your data has been successfully submitted!')
 
             else:
