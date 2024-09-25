@@ -12,7 +12,6 @@ class badword(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    
     @commands.Cog.listener()
     async def on_message(self, message):
         for bad_word in bad_words:
